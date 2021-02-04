@@ -22,7 +22,7 @@ exports.verifyToken = (req, res, next) => {
     req.decode = jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
     return next();
   } catch (err) {
-    if (error.name === 'TokenExpiredError') { // 토큰만료
+    if (err.name === 'TokenExpiredError') { // 토큰만료
       return res.status(419).json({
         code: 419,
         message: '토큰이 만료되었습니다.',
